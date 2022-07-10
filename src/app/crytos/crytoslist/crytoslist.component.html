@@ -1,0 +1,82 @@
+<div class="container-fluid bg-secondary">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col">
+      <div class="formulario">
+        <hr />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar coin"
+          (keyup)="SearchCrypto()"
+          [(ngModel)]="searchtext"
+        />
+
+        <hr />
+
+        <button class="btn btn-dark" (click)="prevPage()">Anteriores</button>
+        &nbsp;
+        <button
+          class="btn btn-dark"
+          (click)="nextPage()"
+          [disabled]="(filtresCryptos | filtro: page).length === 0"
+        >
+          Siguientes
+        </button>
+        <hr />
+        <div class="table-responsive">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Precio</th>
+                <th>HighPrice</th>
+                <th>LowPrice</th>
+                <th>PriceChange</th>
+                <th>PriceChangePercent</th>
+                <th>Volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let resp of filtresCryptos | filtro: page">
+                <td [routerLink]="['/coinDetail', resp.symbol]">
+                  {{ resp.symbol }}
+                </td>
+                <td [routerLink]="['/coinDetail', resp.symbol]">
+                  {{ resp.lastPrice.toLocaleString() }}
+                </td>
+                <td [routerLink]="['/coinDetail', resp.symbol]">
+                  {{ resp.highPrice.toLocaleString() }}
+                </td>
+                <td [routerLink]="['/coinDetail', resp.symbol]">
+                  {{ resp.lowPrice.toLocaleString() }}
+                </td>
+                <td
+                  [routerLink]="['/coinDetail', resp.symbol]"
+                  [ngClass]="
+                    resp.priceChange > 0 ? 'text-success' : 'text-danger'
+                  "
+                >
+                  {{ resp.priceChange.toLocaleString() }}
+                </td>
+                <td
+                  [routerLink]="['/coinDetail', resp.symbol]"
+                  [ngClass]="
+                    resp.priceChangePercent > 0 ? 'text-success' : 'text-danger'
+                  "
+                >
+                  {{ resp.priceChangePercent.toLocaleString() }}%
+                </td>
+                <td [routerLink]="['/coinDetail', resp.symbol]">
+                  {{ resp.volume.toLocaleString() }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-1"></div>
+  </div>
+</div>

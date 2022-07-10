@@ -1,0 +1,84 @@
+<div class="container-fluid bg-secondary">
+  <div class="row">
+    <div id="carta" class="col-4">
+      <mat-card class="card bg-light" *ngFor="let cripto of cardcryptos">
+        <mat-card-header>
+          <h6 class="card-title">{{ cripto.symbol }}</h6>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>Nombre: {{ cripto.symbol }}</p>
+          <p>Precio: {{ cripto.lastPrice }}</p>
+          <p>HighPrice: {{ cripto.highPrice }}</p>
+          <p>LowPrice: {{ cripto.lowPrice }}</p>
+          <p>Volumen: {{ cripto.volume }}</p>
+          <p>Porcentaje de cambio diario: {{ MY_PREC }}%</p>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              [attr.aria-valuenow]="MY_PREC2"
+              [style.width]="MY_PREC + '%'"
+              [style.color]="color"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width: 75%"
+            ></div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="btn btn-dark" (click)="votar()">
+            Añadir a Favoritas
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    
+      <div id="chat" class="col">
+        <div class="container">
+          <br />
+          <h3 id="titulo">CRIPTOMONEDAS FAVORITAS</h3>
+          <hr />
+          <div class="formulario">
+            <hr />
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar coin"
+              (keyup)="SearchCrypto()"
+              [(ngModel)]="searchtext"
+            />
+            <hr />
+            <button class="btn btn-dark" (click)="prevPage()">
+              Anteriores
+            </button>
+            &nbsp;
+            <button
+              class="btn btn-dark"
+              (click)="nextPage()"
+              [disabled]="(cardcryptos | filtro: page).length === 0"
+            >
+              Siguientes
+            </button>
+            <hr />
+            <table class="table table-dark table-hover">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let resp of filtresCryptos | filtro: page">
+                  <td [routerLink]="['/coinDetail', resp.symbol]">
+                    {{ resp.symbol }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    
+  </div>
+</div>
