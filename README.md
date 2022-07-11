@@ -1,4 +1,7 @@
 # Apicrytos
+## Deploy
+
+https://uwongse.github.io/apicrytos/home
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
 
